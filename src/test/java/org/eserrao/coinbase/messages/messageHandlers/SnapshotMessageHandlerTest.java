@@ -3,6 +3,7 @@ package org.eserrao.coinbase.messages.messageHandlers;
 import org.eserrao.coinbase.messages.model.L2UpdateMessage;
 import org.eserrao.coinbase.messages.model.SnapshotMessage;
 import org.eserrao.model.OrderBookEntry;
+import org.eserrao.model.SideType;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +22,7 @@ class SnapshotMessageHandlerTest {
                 () -> MatcherAssert.assertThat(snapshot.getProductId(), Matchers.is("BTC-USD")),
                 () -> MatcherAssert.assertThat(snapshot.getAsks().size(), Matchers.is(1)),
                 () -> MatcherAssert.assertThat(snapshot.getBids().size(), Matchers.is(1))
-                );
+        );
     }
 
     @Test
@@ -31,7 +32,9 @@ class SnapshotMessageHandlerTest {
         SnapshotMessage snapshot = handler.handleMessage(jsonMessage);
         List<OrderBookEntry> entries = handler.convert(snapshot);
         Assertions.assertAll(
-                () -> MatcherAssert.assertThat(entries.size(), Matchers.is(2))
+                () -> MatcherAssert.assertThat(entries.size(), Matchers.is(2)),
+                () -> MatcherAssert.assertThat(entries.stream().filter(o -> o.getSideType() == SideType.BUY).count(), Matchers.is(1L)),
+                () -> MatcherAssert.assertThat(entries.stream().filter(o -> o.getSideType() == SideType.SELL).count(), Matchers.is(1L))
         );
     }
 

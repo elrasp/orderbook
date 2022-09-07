@@ -1,11 +1,8 @@
 package org.eserrao.model;
 
-import org.eserrao.collections.FixedSizeTreeSet;
-
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.stream.Collectors;
 
 public class OrderBook {
 
