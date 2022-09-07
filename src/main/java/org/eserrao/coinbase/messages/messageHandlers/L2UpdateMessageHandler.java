@@ -1,11 +1,12 @@
 package org.eserrao.coinbase.messages.messageHandlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.eserrao.IMessageBus;
 import org.eserrao.coinbase.messages.model.L2UpdateMessage;
 import org.eserrao.model.OrderBookEntry;
+import org.eserrao.model.events.OrderBookUpdateEvent;
 import org.eserrao.model.helpers.OrderBookEntryBuilder;
 
 import java.util.Collections;
@@ -13,12 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Singleton
-public class L2UpdateMessageHandler implements ICoinbaseMessageHandler<L2UpdateMessage> {
+public class L2UpdateMessageHandler extends Level2ChannelMessageHandler<L2UpdateMessage> {
 
     public static final String TYPE = "l2update";
-    private final ObjectMapper mapper = JsonMapper.builder()
-            .findAndAddModules()
-            .build();
+
+    @Inject
+    public L2UpdateMessageHandler(IMessageBus bus) {
+        super(bus);
+    }
 
     @Override
     public String getType() {
@@ -26,12 +29,13 @@ public class L2UpdateMessageHandler implements ICoinbaseMessageHandler<L2UpdateM
     }
 
     @Override
-    public L2UpdateMessage handleMessage(String message) {
+    public List<OrderBookEntry> generateOrderBookEntries(String message) {
         try {
-            return mapper.readValue(message, L2UpdateMessage.class);
+            L2UpdateMessage updateMessage = mapper.readValue(message, L2UpdateMessage.class);
+            return this.convert(updateMessage);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return null;
+            return Collections.emptyList();
         }
     }
 

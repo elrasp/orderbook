@@ -13,5 +13,6 @@ public class ApplicationModule extends AbstractModule {
         this.bind(Application.class);
         this.bind(IGateway.class).to(CoinbaseGateway.class);
         this.bind(IGatewayMessageHandler.class).to(CoinbaseMessageHandler.class);
+        this.bind(IMessageBus.class).to(MessageBus.class);
     }
 }

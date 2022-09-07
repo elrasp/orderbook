@@ -6,20 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.eserrao.MessageBus;
 import org.eserrao.coinbase.messages.CoinbaseMessageHandlerFactory;
 import org.eserrao.coinbase.messages.messageHandlers.ICoinbaseMessageHandler;
 import org.eserrao.coinbase.messages.model.CoinbaseMessage;
 import org.eserrao.gateway.IGatewayMessageHandler;
-import org.eserrao.model.OrderBookEntry;
-import org.eserrao.model.events.OrderBookUpdateEvent;
-
-import java.util.List;
 
 @Singleton
 public class CoinbaseMessageHandler implements IGatewayMessageHandler {
 
-    private final MessageBus bus;
     private final CoinbaseMessageHandlerFactory messageHandlerFactory;
 
     private final ObjectMapper mapper = JsonMapper.builder()
@@ -27,8 +21,7 @@ public class CoinbaseMessageHandler implements IGatewayMessageHandler {
             .build();
 
     @Inject
-    public CoinbaseMessageHandler(MessageBus bus, CoinbaseMessageHandlerFactory messageHandlerFactory) {
-        this.bus = bus;
+    public CoinbaseMessageHandler(CoinbaseMessageHandlerFactory messageHandlerFactory) {
         this.messageHandlerFactory = messageHandlerFactory;
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
@@ -44,9 +37,7 @@ public class CoinbaseMessageHandler implements IGatewayMessageHandler {
         if (messageHandler == null) {
             return;
         }
-        CoinbaseMessage fullMessage = messageHandler.handleMessage(message);
-        List<OrderBookEntry> entries = messageHandler.convert(fullMessage);
-        this.bus.post(new OrderBookUpdateEvent(entries));
+        messageHandler.handleMessage(message);
     }
 
     private CoinbaseMessage getCoinbaseMessage(String message) {
