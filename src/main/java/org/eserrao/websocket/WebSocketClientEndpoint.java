@@ -53,7 +53,7 @@ public class WebSocketClientEndpoint {
     @OnOpen
     public void onOpen(Session userSession) {
         // Callback to be called only once upon a new connection
-        System.out.println("opening WebSocket");
+        System.out.println("Opening WebSocket");
         this.userSession = userSession;
     }
 

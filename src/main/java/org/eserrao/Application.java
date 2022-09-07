@@ -30,9 +30,9 @@ public class Application {
     }
 
     public void stop() {
+        this.gateway.disconnect();
         this.bus.unregister(this);
         this.bus.stop();
-        this.gateway.disconnect();
         System.exit(0);
     }
 

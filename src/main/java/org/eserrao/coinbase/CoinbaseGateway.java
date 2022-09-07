@@ -23,16 +23,19 @@ public class CoinbaseGateway implements IGateway {
 
     @Override
     public void connect() {
+        System.out.println("Connecting to Coinbase API");
         this.websocketClient.connect();
     }
 
     @Override
     public void disconnect() {
+        System.out.println("Disconnecting from Coinbase API");
         this.websocketClient.disconnect();
     }
 
     @Override
     public void subscribe(String productId) {
+        System.out.println("Subscribing to market data of product " + productId);
         String message  = String.format(SUBSCRIPTION_MESSAGE, productId);
         this.websocketClient.sendMessage(message);
     }
