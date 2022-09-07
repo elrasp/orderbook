@@ -1,5 +1,6 @@
 # Orderbook
 Displays an orderbook upto 10 levels using the Coinbase API
+
 [![Tests](https://github.com/elrasp/orderbook/actions/workflows/maven.yml/badge.svg)](https://github.com/elrasp/orderbook/actions/workflows/maven.yml)
 
 ## Coinbase API
