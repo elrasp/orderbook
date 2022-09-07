@@ -7,7 +7,7 @@ import org.eserrao.model.events.OrderBookUpdateEvent;
 
 import java.util.List;
 
-public abstract class Level2ChannelMessageHandler<T extends CoinbaseMessage> extends CoinbaseMessageHandler<T> {
+public abstract class Level2ChannelMessageHandler<T extends CoinbaseMessage> extends CoinbaseWebsocketMessageHandler<T> {
 
     public Level2ChannelMessageHandler(IMessageBus bus) {
         super(bus);

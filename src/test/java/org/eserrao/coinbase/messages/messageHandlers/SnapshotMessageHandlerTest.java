@@ -46,7 +46,7 @@ class SnapshotMessageHandlerTest {
 
     @Test
     public void testType() {
-        CoinbaseMessageHandler<SnapshotMessage> messageHandler = new SnapshotMessageHandler(this.messageBus);
+        CoinbaseWebsocketMessageHandler<SnapshotMessage> messageHandler = new SnapshotMessageHandler(this.messageBus);
         MatcherAssert.assertThat(messageHandler.getType(), Matchers.is("snapshot"));
     }
 }

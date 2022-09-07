@@ -9,7 +9,7 @@ import org.eserrao.coinbase.messages.model.ErrorMessage;
 import org.eserrao.model.events.ErrorEvent;
 
 @Singleton
-public class ErrorMessageHandler extends CoinbaseMessageHandler<ErrorMessage> {
+public class ErrorMessageHandler extends CoinbaseWebsocketMessageHandler<ErrorMessage> {
     public static final String TYPE = "error";
 
     @Inject

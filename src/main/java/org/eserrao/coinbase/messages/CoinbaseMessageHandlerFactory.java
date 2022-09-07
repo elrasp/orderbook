@@ -1,7 +1,7 @@
 package org.eserrao.coinbase.messages;
 
 import com.google.inject.Singleton;
-import org.eserrao.coinbase.messages.messageHandlers.CoinbaseMessageHandler;
+import org.eserrao.coinbase.messages.messageHandlers.CoinbaseWebsocketMessageHandler;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -10,14 +10,14 @@ import java.util.Map;
 @Singleton
 public class CoinbaseMessageHandlerFactory {
 
-    private final Map<String, CoinbaseMessageHandler> messageHandlers;
+    private final Map<String, CoinbaseWebsocketMessageHandler> messageHandlers;
 
     @Inject
-    public CoinbaseMessageHandlerFactory(Map<String, CoinbaseMessageHandler> messageHandlers) {
+    public CoinbaseMessageHandlerFactory(Map<String, CoinbaseWebsocketMessageHandler> messageHandlers) {
         this.messageHandlers = messageHandlers;
     }
 
-    public CoinbaseMessageHandler getMessageHandler(String type) {
+    public CoinbaseWebsocketMessageHandler getMessageHandler(String type) {
         return this.messageHandlers.get(type);
     }
 }

@@ -2,19 +2,13 @@ package org.eserrao.coinbase.messages.messageHandlers;
 
 import org.eserrao.IMessageBus;
 import org.eserrao.coinbase.messages.model.ErrorMessage;
-import org.eserrao.coinbase.messages.model.SnapshotMessage;
-import org.eserrao.model.OrderBookEntry;
-import org.eserrao.model.SideType;
 import org.eserrao.model.events.ErrorEvent;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
-import java.util.List;
 
 class ErrorMessageHandlerTest {
 
@@ -38,7 +32,7 @@ class ErrorMessageHandlerTest {
 
     @Test
     public void testType() {
-        CoinbaseMessageHandler<ErrorMessage> messageHandler = new ErrorMessageHandler(this.messageBus);
+        CoinbaseWebsocketMessageHandler<ErrorMessage> messageHandler = new ErrorMessageHandler(this.messageBus);
         MatcherAssert.assertThat(messageHandler.getType(), Matchers.is("error"));
     }
 }

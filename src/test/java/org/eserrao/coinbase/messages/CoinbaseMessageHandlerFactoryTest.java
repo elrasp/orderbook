@@ -1,7 +1,7 @@
 package org.eserrao.coinbase.messages;
 
 import org.eserrao.IMessageBus;
-import org.eserrao.coinbase.messages.messageHandlers.CoinbaseMessageHandler;
+import org.eserrao.coinbase.messages.messageHandlers.CoinbaseWebsocketMessageHandler;
 import org.eserrao.coinbase.messages.messageHandlers.L2UpdateMessageHandler;
 import org.eserrao.coinbase.messages.messageHandlers.SnapshotMessageHandler;
 import org.eserrao.coinbase.messages.model.CoinbaseMessage;
@@ -38,8 +38,8 @@ class CoinbaseMessageHandlerFactoryTest {
     @ParameterizedTest(name = "type: {0}")
     @MethodSource("factoryTestCase")
     public void shouldReturnMessageHandlerForCorrespondingType(String type, Class<? extends CoinbaseMessage> expectedClass) {
-        Map<String, CoinbaseMessageHandler> messageHandlers = Stream.of(new L2UpdateMessageHandler(this.messageBus), new SnapshotMessageHandler(this.messageBus))
-                .collect(Collectors.toMap(CoinbaseMessageHandler::getType, Function.identity()));
+        Map<String, CoinbaseWebsocketMessageHandler> messageHandlers = Stream.of(new L2UpdateMessageHandler(this.messageBus), new SnapshotMessageHandler(this.messageBus))
+                .collect(Collectors.toMap(CoinbaseWebsocketMessageHandler::getType, Function.identity()));
         CoinbaseMessageHandlerFactory messageFactory = new CoinbaseMessageHandlerFactory(messageHandlers);
         MatcherAssert.assertThat(messageFactory.getMessageHandler(type), expectedClass == null ? Matchers.nullValue() : Matchers.instanceOf(expectedClass));
     }
