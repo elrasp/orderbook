@@ -1,6 +1,5 @@
 package org.eserrao.coinbase.messages.messageHandlers;
 
-import org.eserrao.coinbase.messages.model.L2UpdateMessage;
 import org.eserrao.coinbase.messages.model.SnapshotMessage;
 import org.eserrao.model.OrderBookEntry;
 import org.eserrao.model.SideType;
