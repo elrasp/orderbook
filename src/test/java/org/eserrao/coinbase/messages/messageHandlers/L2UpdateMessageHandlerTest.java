@@ -45,7 +45,7 @@ class L2UpdateMessageHandlerTest {
 
     @Test
     public void testType() {
-        ICoinbaseMessageHandler<L2UpdateMessage> messageHandler = new L2UpdateMessageHandler(this.messageBus);
+        CoinbaseMessageHandler<L2UpdateMessage> messageHandler = new L2UpdateMessageHandler(this.messageBus);
         MatcherAssert.assertThat(messageHandler.getType(), Matchers.is("l2update"));
     }
 

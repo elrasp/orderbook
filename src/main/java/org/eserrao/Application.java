@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import com.google.inject.Singleton;
 import org.eserrao.gateway.IGateway;
 import org.eserrao.model.OrderBook;
+import org.eserrao.model.events.ErrorEvent;
 import org.eserrao.model.events.OrderBookUpdateEvent;
 
 import javax.inject.Inject;
@@ -31,8 +32,8 @@ public class Application {
 
     public void stop() {
         this.gateway.disconnect();
-        this.bus.unregister(this);
         this.bus.stop();
+        this.bus.unregister(this);
         System.exit(0);
     }
 
@@ -42,5 +43,11 @@ public class Application {
         if (isOrderBookUpdated) {
             this.orderBook.printOrderBook();
         }
+    }
+
+    @Subscribe
+    public void onErrorEvent(ErrorEvent event) {
+        System.out.println("Error:" + event.message());
+        this.stop();
     }
 }

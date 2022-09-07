@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eserrao.coinbase.messages.CoinbaseMessageHandlerFactory;
-import org.eserrao.coinbase.messages.messageHandlers.ICoinbaseMessageHandler;
 import org.eserrao.coinbase.messages.model.CoinbaseMessage;
 import org.eserrao.gateway.IGatewayMessageHandler;
 
@@ -33,7 +32,7 @@ public class CoinbaseMessageHandler implements IGatewayMessageHandler {
         if (coinbaseMessage == null) {
             return;
         }
-        ICoinbaseMessageHandler messageHandler = this.messageHandlerFactory.getMessageHandler(coinbaseMessage.getType());
+        org.eserrao.coinbase.messages.messageHandlers.CoinbaseMessageHandler messageHandler = this.messageHandlerFactory.getMessageHandler(coinbaseMessage.getType());
         if (messageHandler == null) {
             return;
         }
