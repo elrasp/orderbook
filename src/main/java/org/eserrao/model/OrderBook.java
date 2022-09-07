@@ -1,5 +1,7 @@
 package org.eserrao.model;
 
+import org.eserrao.model.helpers.OrderBookOutputHelper;
+
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -95,6 +97,6 @@ public class OrderBook {
     }
 
     public void printOrderBook() {
-
+        OrderBookOutputHelper.print(this);
     }
 }
