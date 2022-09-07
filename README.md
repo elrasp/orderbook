@@ -8,8 +8,8 @@ The WebSocket Feed of the Coinbase API is used. More information about the API c
 The project has been built using Java JDK 17.0.4
 
 ## How to run
-`java -jar target/orderbook-1.0-SNAPSHOT-jar-with-dependencies.jar "BTC-USD"`
+`java -jar target/orderbook-1.0-SNAPSHOT-jar-with-dependencies.jar BTC-USD`
 <ul>
-<li>Takes a single command line argument that indicates the product id for which the market data feed is required</li>
+<li>Takes a single command line argument that indicates the product id for which the market data feed is required. If the product id is not provided by default BTC-USD will be considered.</li>
 <li>Use CRTL + C to exit</li>
 </ul>

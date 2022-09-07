@@ -8,6 +8,13 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main {
     public static void main(String[] args) {
+        String productId = "BTC-USD";
+        if (args.length == 0) {
+            System.out.println("Subscribing to default product id BTC-USD");
+        } else {
+            productId = args[0];
+        }
+
         Injector injector = Guice.createInjector(new ApplicationModule(), new CoinbaseModule());
 
         CountDownLatch latch = new CountDownLatch(1);
@@ -15,7 +22,6 @@ public class Main {
 
         Application application = injector.getInstance(Application.class);
         application.start();
-        String productId = "BTC-USD";
         application.subscribe(productId);
 
         try {
